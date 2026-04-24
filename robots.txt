@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://digly-solutions.com/sitemap.xml

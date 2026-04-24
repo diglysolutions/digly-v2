@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DIGLY</title>
+  <meta
+    name="description"
+    content="Fallback SPA de DIGLY pour les routes internes en hébergement statique."
+  >
+  <meta name="robots" content="noindex,follow">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="DIGLY">
+  <meta property="og:title" content="DIGLY">
+  <meta property="og:description" content="Fallback SPA de DIGLY pour les routes internes en hébergement statique.">
+  <meta property="og:url" content="https://digly-solutions.com/404.html">
+  <meta property="og:image" content="https://digly-solutions.com/assets/img/home/logo.png">
+  <link rel="icon" type="image/png" href="/assets/img/home/logo.png">
+  <link rel="stylesheet" href="./assets/css/styles.css">
+  <script type="module" src="/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#app">Aller au contenu</a>
+  <nav class="navbar" aria-label="Navigation principale">
+    <a class="logo" href="/" onclick="navigate('/'); return false;" aria-label="Retour à l'accueil DIGLY">
+      <img src="/assets/img/home/logo.png" alt="DIGLY" class="logo-img">
+    </a>
+
+    <button
+      class="nav-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="nav-links"
+      aria-label="Ouvrir le menu"
+      onclick="window.toggleNavMenu()"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <div class="nav-links" id="nav-links">
+      <a href="/" onclick="navigate('/'); return false;">Accueil</a>
+
+      <div class="nav-item nav-dropdown" data-dropdown="solutions">
+        <a href="/solutions" onclick="navigate('/solutions'); return false;">
+          <span class="nav-link-label">Solutions</span>
+          <span class="nav-caret" aria-hidden="true"></span>
+        </a>
+
+        <button
+          class="dropdown-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="dropdown-solutions"
+          aria-label="Afficher les sous-rubriques Solutions"
+          onclick="window.toggleNavDropdown('solutions', event)"
+        ></button>
+
+        <div class="dropdown-menu" id="dropdown-solutions">
+          <a href="/solutions#enterprise" onclick="navigate('/solutions', 'enterprise'); return false;">Entreprises</a>
+          <a href="/solutions#university" onclick="navigate('/solutions', 'university'); return false;">Enseignement supérieur</a>
+          <a href="/solutions#training" onclick="navigate('/solutions', 'training'); return false;">Centres de formation</a>
+          <a href="/solutions#association" onclick="navigate('/solutions', 'association'); return false;">Associations & organisations</a>
+        </div>
+      </div>
+
+      <div class="nav-item nav-dropdown" data-dropdown="cases">
+        <a href="/cases" onclick="navigate('/cases'); return false;">
+          <span class="nav-link-label">Études de cas</span>
+          <span class="nav-caret" aria-hidden="true"></span>
+        </a>
+
+        <button
+          class="dropdown-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="dropdown-cases"
+          aria-label="Afficher les sous-rubriques Études de cas"
+          onclick="window.toggleNavDropdown('cases', event)"
+        ></button>
+
+        <div class="dropdown-menu" id="dropdown-cases">
+          <a href="/cases#enterprise" onclick="navigate('/cases', 'enterprise'); return false;">Entreprises</a>
+          <a href="/cases#university" onclick="navigate('/cases', 'university'); return false;">Enseignement supérieur</a>
+          <a href="/cases#training" onclick="navigate('/cases', 'training'); return false;">Centres de formation</a>
+          <a href="/cases#association" onclick="navigate('/cases', 'association'); return false;">Associations & organisations</a>
+        </div>
+      </div>
+
+      <div class="nav-item nav-dropdown" data-dropdown="pedagogy">
+        <a href="/notre-pedagogie" onclick="navigate('/notre-pedagogie'); return false;">
+          <span class="nav-link-label">Notre pédagogie</span>
+          <span class="nav-caret" aria-hidden="true"></span>
+        </a>
+
+        <button
+          class="dropdown-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="dropdown-pedagogy"
+          aria-label="Afficher les sous-rubriques Notre pédagogie"
+          onclick="window.toggleNavDropdown('pedagogy', event)"
+        ></button>
+
+        <div class="dropdown-menu" id="dropdown-pedagogy">
+          <a href="/notre-pedagogie#solutions" onclick="navigate('/notre-pedagogie', 'solutions'); return false;">Solutions</a>
+          <a href="/notre-pedagogie#cases" onclick="navigate('/notre-pedagogie', 'cases'); return false;">Études de cas</a>
+        </div>
+      </div>
+
+      <a href="/contact" onclick="navigate('/contact'); return false;">Contact</a>
+    </div>
+  </nav>
+
+  <div id="loader" class="loader hidden" aria-hidden="true">
+    <div class="spinner"></div>
+    <div class="progress-container">
+      <div id="progress-bar" class="progress-bar"></div>
+    </div>
+    <p id="loader-text" class="loader-text" aria-live="polite"></p>
+  </div>
+
+  <div id="success-modal" class="modal-overlay hidden" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="success-modal-title">
+      <div class="modal-header">
+        <div class="success-icon">✓</div>
+      </div>
+      <div class="modal-body">
+        <h2 id="success-modal-title">Analyse transmise avec succès</h2>
+        <p>Votre demande d'<strong>Audit Flash</strong> a été enregistrée par notre système d'ingénierie.</p>
+        <div class="modal-summary">
+          <p><strong>Secteur d'analyse :</strong> <span id="summary-sector">-</span></p>
+          <p><strong>Axe prioritaire :</strong> <span id="summary-need">-</span></p>
+        </div>
+        <p class="secondary-text">Un consultant en performance pédagogique étudiera votre dossier. Vous recevrez une analyse préliminaire sous 48h.</p>
+      </div>
+      <div class="modal-actions">
+        <button class="cta primary" onclick="window.downloadSummaryPDF()">Télécharger le brief (PDF)</button>
+        <button class="cta secondary" onclick="window.hideSuccessModal()">Fermer</button>
+      </div>
+    </div>
+  </div>
+
+  <main id="app"></main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</body>
+</html>

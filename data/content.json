@@ -1,0 +1,294 @@
+{
+  "site": {
+    "name": "DIGLY",
+    "baseUrl": "https://digly-solutions.com",
+    "contactEmail": "dhernandez@digly-solutions.com",
+    "logoPath": "/assets/img/home/logo.png",
+    "ogImage": "/assets/img/home/logo.png",
+    "navigation": {
+      "home": "Accueil",
+      "solutions": "Solutions",
+      "cases": "Études de cas",
+      "pedagogy": "Notre pédagogie",
+      "contact": "Contact"
+    },
+    "seo": {
+      "defaultTitle": "DIGLY — Ingénierie pédagogique & performance internationale",
+      "defaultDescription": "DIGLY conçoit des systèmes d'apprentissage et des dispositifs de performance communicationnelle pour entreprises, universités, centres de formation et organisations.",
+      "keywords": "ingénierie pédagogique, anglais professionnel, communication internationale, formation sur mesure, performance opérationnelle",
+      "routes": {
+        "/": {
+          "title": "DIGLY — Ingénierie pédagogique & performance internationale",
+          "description": "Des dispositifs d'apprentissage pensés pour améliorer la communication, la coordination et la performance dans les environnements internationaux."
+        },
+        "/solutions": {
+          "title": "Solutions | DIGLY",
+          "description": "Découvrez les solutions DIGLY pour entreprises, universités, centres de formation et organisations à impact."
+        },
+        "/cases": {
+          "title": "Études de cas | DIGLY",
+          "description": "Des cas concrets pour comprendre comment DIGLY transforme des besoins de communication en résultats mesurables."
+        },
+        "/notre-pedagogie": {
+          "title": "Notre pédagogie | DIGLY",
+          "description": "L'approche DIGLY : audit, ingénierie pédagogique, déploiement et mesure d'impact."
+        },
+        "/contact": {
+          "title": "Contact | DIGLY",
+          "description": "Initiez un diagnostic DIGLY et décrivez votre contexte pour recevoir une première analyse."
+        },
+        "/mentions-legales.html": {
+          "title": "Mentions légales | DIGLY",
+          "description": "Informations légales, hébergement et responsabilités éditoriales du site DIGLY."
+        },
+        "/politique-confidentialite.html": {
+          "title": "Politique de confidentialité | DIGLY",
+          "description": "Politique de confidentialité de DIGLY concernant la collecte, l'utilisation et la protection des données."
+        }
+      }
+    },
+    "analytics": {
+      "enabled": false,
+      "provider": "plausible",
+      "scriptUrl": "https://plausible.io/js/script.js",
+      "domain": "",
+      "measurementId": ""
+    },
+    "pdf": {
+      "filename": "DIGLY_Brief_Demande.pdf",
+      "title": "Brief de demande DIGLY",
+      "subtitle": "Récapitulatif de votre demande de diagnostic",
+      "nextStepsTitle": "Prochaines étapes",
+      "nextSteps": [
+        "Votre demande a bien été transmise à DIGLY.",
+        "Un premier retour de cadrage est préparé à partir des informations envoyées.",
+        "Vous recevrez une réponse personnalisée sous 48h ouvrées."
+      ]
+    }
+  },
+
+  "home": {
+    "title": "L'ingénierie pédagogique au service de votre performance internationale",
+    "subtitle": "Nous concevons des architectures d'apprentissage sur-mesure pour transformer la communication internationale en levier de croissance. Expertise, diagnostic et impact opérationnel.",
+    "cta": "Discutons de votre contexte"
+  },
+
+  "dossier": {
+    "title": "Méthodologie DIGLY",
+    "intro": "Une méthode en 4 phases pour transformer l'apprentissage en performance mesurable.",
+    "phases": [
+      {
+        "name": "Analyse",
+        "description": "Comprendre les besoins organisationnels et les points de friction communicationnelle."
+      },
+      {
+        "name": "Architecture du dispositif",
+        "description": "Construire des parcours adaptés aux usages réels et au contexte métier."
+      },
+      {
+        "name": "Déploiement",
+        "description": "Intégrer l'apprentissage dans les équipes, les pratiques et les workflows."
+      },
+      {
+        "name": "Évaluation d'impact",
+        "description": "Mesurer les effets sur la performance, la fluidité des échanges et l'autonomie."
+      }
+    ]
+  },
+
+  "projects": [
+    {
+      "id": "p1",
+      "type": "case-study",
+      "title": "Montée en qualité des échanges d'une équipe internationale",
+      "context": "Entreprise technologique de taille intermédiaire avec équipes réparties en Europe",
+      "challenge": "L'anglais de travail freinait la coordination entre équipes produit, support et management",
+      "solution": "Dispositif centré sur les situations critiques de réunion, reporting et prise de décision",
+      "result": "Réunions plus courtes, messages plus précis et meilleure autonomie des équipes"
+    },
+    {
+      "id": "p2",
+      "type": "solution",
+      "title": "Architecture d'anglais professionnel orientée usages",
+      "context": "Initiative de formation portée par une direction RH",
+      "challenge": "L'offre existante restait trop scolaire et peu connectée aux réalités métier",
+      "solution": "Parcours scénarisé autour des usages quotidiens et des contextes professionnels réels",
+      "result": "Meilleure adhésion et progression plus visible dans les situations de travail"
+    }
+  ],
+
+  "cases": [
+    {
+      "id": "global-team-communication",
+      "title": "Fluidifier la coordination d'une équipe internationale",
+      "category": "enterprise",
+      "type": "Cas entreprise",
+      "subtitle": "Comment une entreprise technologique a réduit les frictions entre équipes réparties sur plusieurs pays.",
+      "context": "Entreprise tech internationale avec équipes distribuées entre la France, l'Allemagne et Singapour. Les managers constataient une perte de temps importante dans les réunions transverses et les arbitrages projet.",
+      "challenge": "Les collaborateurs disposaient d'un anglais fonctionnel, mais pas assez précis pour cadrer, nuancer, reformuler ou arbitrer rapidement dans les moments à enjeu.",
+      "metrics": {
+        "m1": "+32%",
+        "m1_label": "de fluidité dans les échanges clés",
+        "m2": "-40%",
+        "m2_label": "d'erreurs de compréhension remontées",
+        "m3": "2x",
+        "m3_label": "plus de rapidité dans certaines décisions"
+      },
+      "approach": [
+        {
+          "title": "Diagnostic des frictions",
+          "text": "Observation des réunions, analyse des points de blocage et repérage des usages les plus critiques."
+        },
+        {
+          "title": "Dispositif ciblé",
+          "text": "Conception d'un parcours orienté réunions, coordination transverse et messages de pilotage."
+        },
+        {
+          "title": "Transfert en situation",
+          "text": "Mises en situation proches du réel pour faire émerger des réflexes directement activables."
+        }
+      ],
+      "before": [
+        "Réunions longues et peu conclusives",
+        "Messages reformulés plusieurs fois avant validation",
+        "Dépendance excessive à quelques profils très à l'aise"
+      ],
+      "after": [
+        "Interactions plus directes et mieux structurées",
+        "Décisions cadrées plus rapidement",
+        "Montée en autonomie de plusieurs interlocuteurs clés"
+      ],
+      "result": "+32% de fluidité sur les interactions critiques, baisse nette des malentendus et prise de décision accélérée.",
+      "insight": "Dans les équipes globales, la performance progresse quand l'apprentissage cible les moments de coordination à fort enjeu, pas seulement le niveau général."
+    },
+    {
+      "id": "academic-english-program",
+      "title": "Renforcer l'aisance orale dans un parcours académique international",
+      "category": "university",
+      "type": "Cas université",
+      "subtitle": "Un programme d'accompagnement conçu pour rapprocher niveau linguistique et usages universitaires réels.",
+      "context": "Université publique développant plusieurs parcours à dimension internationale. Les étudiants comprenaient les contenus, mais restaient en retrait dans les échanges, présentations et situations de mobilité.",
+      "challenge": "Le problème n'était pas seulement lexical : les étudiants manquaient de sécurité dans les interactions académiques concrètes, ce qui limitait leur participation et leur projection.",
+      "metrics": {
+        "m1": "+45%",
+        "m1_label": "de progression en aisance orale",
+        "m2": "+28%",
+        "m2_label": "de participation active en cours",
+        "m3": "+19%",
+        "m3_label": "de confiance perçue avant mobilité"
+      },
+      "approach": [
+        {
+          "title": "Analyse des usages cibles",
+          "text": "Repérage des situations académiques concrètes : présentation, discussion, interaction de groupe et mobilité."
+        },
+        {
+          "title": "Parcours contextualisé",
+          "text": "Construction d'un dispositif centré sur l'oral, la structuration des idées et l'interaction crédible."
+        },
+        {
+          "title": "Évaluation de transfert",
+          "text": "Mesure de la progression à travers des situations simulées proches de la réalité universitaire."
+        }
+      ],
+      "before": [
+        "Étudiants hésitants dans les prises de parole",
+        "Participation limitée malgré une bonne compréhension",
+        "Écart entre apprentissage linguistique et situations académiques réelles"
+      ],
+      "after": [
+        "Présentations plus structurées et plus assumées",
+        "Participation plus active dans les séminaires",
+        "Meilleure projection dans les contextes internationaux"
+      ],
+      "result": "+45% d'aisance orale observée, engagement renforcé et meilleure cohérence entre ambition internationale et usages étudiants.",
+      "insight": "Dans le supérieur, l'anglais devient réellement utile quand il est travaillé comme un outil de participation, pas seulement comme une discipline."
+    },
+    {
+      "id": "formation-hospitality",
+      "title": "Repositionner un parcours d'anglais pour l'hôtellerie-tourisme",
+      "category": "training",
+      "type": "Cas centre de formation",
+      "subtitle": "Un centre de formation a fait évoluer son offre pour mieux répondre aux usages métier du terrain.",
+      "context": "Organisme spécialisé dans les métiers de l'accueil, de l'hôtellerie et du tourisme. Les apprenants avaient besoin d'un anglais immédiatement mobilisable face à une clientèle internationale.",
+      "challenge": "L'offre existante restait trop descendante et trop généraliste pour sécuriser des interactions de service, de résolution de problème et de relation client.",
+      "metrics": {
+        "m1": "+80%",
+        "m1_label": "de satisfaction client rapportée",
+        "m2": "+45%",
+        "m2_label": "de rétention sur certains parcours",
+        "m3": "1,7x",
+        "m3_label": "plus de mise en pratique observée"
+      },
+      "approach": [
+        {
+          "title": "Lecture de l'offre existante",
+          "text": "Analyse des écarts entre contenus proposés, attentes terrain et situations de service réelles."
+        },
+        {
+          "title": "Refonte orientée usage",
+          "text": "Organisation du parcours autour des scénarios clés de l'accueil, de la relation client et des imprévus."
+        },
+        {
+          "title": "Validation par transfert",
+          "text": "Mesure des effets à travers des mises en situation professionnelles et un suivi de l'engagement."
+        }
+      ],
+      "before": [
+        "Contenus utiles mais trop génériques",
+        "Difficulté à mesurer l'impact métier",
+        "Faible transfert dans les interactions de terrain"
+      ],
+      "after": [
+        "Parcours mieux aligné sur les usages professionnels",
+        "Engagement renforcé des apprenants",
+        "Valeur du dispositif plus visible pour le centre et les partenaires"
+      ],
+      "result": "Hausse de la satisfaction, meilleure rétention et progression plus lisible dans les situations d'accueil et de service.",
+      "insight": "Pour les centres de formation, la crédibilité d'un parcours repose sur sa capacité à coller aux gestes métier, pas sur la seule exhaustivité des contenus."
+    },
+    {
+      "id": "association-multi-acteurs",
+      "title": "Clarifier la coordination d'une association en contexte multiacteur",
+      "category": "association",
+      "type": "Cas association",
+      "subtitle": "Une structure à impact social a renforcé ses échanges avec partenaires, équipe terrain et financeurs.",
+      "context": "Association opérant sur plusieurs projets avec bénévoles, partenaires européens et interlocuteurs institutionnels. Les messages circulaient, mais de façon inégale selon les profils et les contextes.",
+      "challenge": "Les écarts de niveau, de disponibilité et de rôle rendaient certaines coordinations fragiles, notamment lors des réunions de projet, points d'avancement et échanges externes.",
+      "metrics": {
+        "m1": "+37%",
+        "m1_label": "de clarté perçue dans les échanges projet",
+        "m2": "-29%",
+        "m2_label": "de retours correctifs sur les comptes rendus",
+        "m3": "+24%",
+        "m3_label": "de fluidité dans la coordination externe"
+      },
+      "approach": [
+        {
+          "title": "Repérage des interactions sensibles",
+          "text": "Identification des points où la communication freinait la coordination et la lisibilité des actions."
+        },
+        {
+          "title": "Parcours léger et ciblé",
+          "text": "Création d'un dispositif court centré sur les usages les plus sensibles pour l'équipe et les partenaires."
+        },
+        {
+          "title": "Suivi pragmatique",
+          "text": "Observation d'effets concrets sur la clarté, la régularité et la qualité des échanges."
+        }
+      ],
+      "before": [
+        "Messages trop variables selon les interlocuteurs",
+        "Réunions projet peu structurées",
+        "Coordination externe dépendante de quelques personnes-clés"
+      ],
+      "after": [
+        "Comptes rendus et messages plus lisibles",
+        "Répartition plus claire de l'information",
+        "Meilleure continuité entre terrain, coordination et partenaires"
+      ],
+      "result": "Coordination plus stable, échanges externes clarifiés et réduction des corrections nécessaires après réunion.",
+      "insight": "Dans les structures à impact, de petits gains de clarté produisent souvent de grands effets sur la continuité des actions."
+    }
+  ]
+}
