@@ -461,7 +461,7 @@ p {
   }
 }
 
-/* 🔥 SKELETON UI */
+/*  SKELETON UI */
 .skeleton {
   background: linear-gradient(90deg, #eee 25%, #f5f5f5 50%, #eee 75%);
   background-size: 200% 100%;
@@ -518,74 +518,6 @@ p {
 .card {
   font-size: 17px;
 }
-
-/* MOBILE FONT OPTIMIZATION ONLY */
-@media (max-width: 768px) {
-  body {
-    font-size: 15px;
-    line-height: 1.75;
-    text-rendering: optimizeLegibility;
-  }
-
-  .hero-dark {
-    padding: 60px 20px;
-  }
-
-  .hero-dark h1 {
-    font-size: 30px;
-    line-height: 1.2;
-    letter-spacing: -0.02em;
-  }
-
-  .hero-dark .subtitle {
-    font-size: 15px;
-    line-height: 1.8;
-    max-width: 100%;
-  }
-
-  .hero-dark .tags {
-    font-size: 14px;
-    line-height: 1.75;
-    opacity: 0.75;
-  }
-
-  .hero-dark .cta,
-  .cta.primary {
-    font-size: 15px;
-    padding: 12px 18px;
-    min-width: auto;
-  }
-
-  .nav-links a,
-  .nav a {
-    font-size: 15px;
-  }
-
-  h1,
-  .hero h1 {
-    font-size: 36px;
-    line-height: 1.2;
-  }
-
-  .section h2 {
-    font-size: 30px;
-    line-height: 1.25;
-  }
-
-  p,
-  .section p,
-  .footer,
-  .contact input,
-  .contact textarea {
-    font-size: 15px;
-    line-height: 1.75;
-  }
-
-  .card {
-    font-size: 15px;
-  }
-}
-
 
 .card p {
   font-size: 16px;
@@ -955,42 +887,112 @@ p {
   }
 }
 
+/* 📱 OPTIMIZACIÓN MÓVIL DEFINITIVA (AL FINAL PARA PRIORIDAD) */
+@media (max-width: 768px) {
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  /* Los headers ahora se ajustan al ancho de la pantalla */
+  h1, #app h1, .hero-dark h1 {
+    font-size: clamp(1.7rem, 8vw, 2.1rem) !important;
+    line-height: 1.15 !important;
+    letter-spacing: -0.02em !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    hyphens: auto;
+    margin-bottom: 16px !important;
+  }
+
+  h2, #app h2, .section h2 {
+    font-size: 1.6rem !important;
+    line-height: 1.2 !important;
+  }
+
+  h3, #app h3 {
+    font-size: 1.35rem !important;
+  }
+
+  /* Ajuste de espaciados para no "ahogar" el contenido */
+  .section {
+    padding: 50px 20px !important;
+  }
+
+  .hero-dark {
+    padding: 100px 20px 60px !important;
+  }
+
+  .subtitle, #app .subtitle, .hero-dark .subtitle {
+    font-size: 1.05rem !important;
+    line-height: 1.5 !important;
+    max-width: 100% !important;
+  }
+
+  .tags, #app .tags, .hero-dark .tags {
+    font-size: 0.85rem !important;
+    margin: 15px 0 !important;
+  }
+
+  /* Convertimos todos los grids en columnas simples */
+  .grid-2x2, .grid-3, .grid-4, .cards-2, .metrics-bar, .pedagogy-steps-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+
+  .card, .metric, .case-card, .result-card, .insight-box, .pedagogy-step-card {
+    width: 100% !important;
+    min-height: auto !important;
+    padding: 20px !important;
+  }
+
+  .cta {
+    width: 100% !important;
+    min-width: 0 !important;
+    display: block !important;
+  }
+}
+
 /* GLOBAL TYPOGRAPHY SCALE-UP */
-.nav-links a {
-  font-size: 16px;
-}
+/* Encapsulamos esto para que SOLO afecte a escritorio, evitando que rompa el móvil */
+@media (min-width: 769px) {
+  .nav-links a {
+    font-size: 16px;
+  }
 
-#app h1 {
-  font-size: clamp(3.6rem, 5vw, 4.6rem);
-}
+  #app h1 {
+    font-size: clamp(2.2rem, 5vw, 4.6rem);
+  }
 
-#app h2 {
-  font-size: clamp(2.4rem, 3.6vw, 3rem);
-}
+  #app h2 {
+    font-size: clamp(2.4rem, 3.6vw, 3rem);
+  }
 
-#app h3 {
-  font-size: 1.55rem;
-}
+  #app h3 {
+    font-size: 1.55rem;
+  }
 
-#app p,
-#app li,
-#app input,
-#app textarea,
-#app label,
-#app .subtitle,
-#app .tags,
-#app .badge,
-#app .card,
-#app .filter-btn,
-#app .cta {
-  font-size: 18px;
-}
+  #app p,
+  #app li,
+  #app input,
+  #app textarea,
+  #app label,
+  #app .subtitle,
+  #app .tags,
+  #app .badge,
+  #app .card,
+  #app .filter-btn,
+  #app .cta {
+    font-size: 18px;
+  }
 
-#app input,
-#app textarea,
-#app .filter-btn,
-#app .badge {
-  font-size: 17px;
+  #app input,
+  #app textarea,
+  #app .filter-btn,
+  #app .badge {
+    font-size: 17px;
+  }
 }
 
 /* KEEP FOOTER SIZE UNCHANGED */
@@ -1576,5 +1578,71 @@ body.menu-open {
   .modal-actions .cta {
     width: 100%;
     min-width: 0;
+  }
+}
+
+/* ============================================================ 
+   🚀 GESTOR ÚNICO DE VISTA MÓVIL (SISTEMA DE CONTROL TOTAL)
+   ============================================================ */
+@media (max-width: 768px) {
+  html, body {
+    overflow-x: hidden !important;
+  }
+
+  /* Reducción controlada de headers para que entren en la caja móvil */
+  h1, #app h1, 
+  .hero-dark h1,
+  section h1 {
+    /* Reducimos el máximo de 2.2rem a 1.85rem para asegurar el encaje */
+    font-size: clamp(1.35rem, 8vw, 1.8rem) !important;
+    line-height: 1.2 !important;
+    letter-spacing: -0.02em !important;
+    word-break: break-word !important;
+    overflow-wrap: anywhere !important;
+    hyphens: auto !important;
+    padding: 0 4px !important;
+    max-width: 100% !important;
+    text-align: center !important;
+  }
+
+  h2, #app h2, .section h2 {
+    font-size: clamp(1.2rem, 6vw, 1.5rem) !important;
+    line-height: 1.3 !important;
+  }
+
+  /* Gestión de Espaciados (Layout) */
+  #app {
+    padding: 80px 15px 40px !important;
+  }
+
+  .section {
+    padding: 48px 15px !important;
+  }
+
+  .hero-dark {
+    padding: 100px 15px 60px !important;
+  }
+
+  .subtitle, .hero-dark .subtitle {
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+  }
+
+  /* Transformador de Rejillas: Todas a una sola columna */
+  .grid-2x2, .grid-3, .grid-4, .cards-2, .metrics-bar, 
+  .pedagogy-steps-grid, .before-after {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 24px !important;
+  }
+
+  .card, .metric, .case-card, .result-card, .insight-box {
+    width: 100% !important;
+    min-height: auto !important;
+  }
+
+  .cta {
+    width: 100% !important;
+    min-width: 0 !important;
   }
 }

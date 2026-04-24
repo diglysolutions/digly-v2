@@ -1,13 +1,18 @@
-[build]
-  publish = "."
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Instrucción maestra: el navegador debe verificar con el servidor si el archivo cambió
+    Cache-Control = "public, max-age=0, must-revalidate"
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    # Para archivos estáticos (CSS/Imágenes), forzamos la revalidación instantánea
+    Cache-Control = "public, max-age=0, must-revalidate"
 
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-
-[[redirects]]
-  from = "https://www.digly-solutions.com/*"
-  to = "https://digly-solutions.com/:splat"
-  status = 301
-  force = true

@@ -9,7 +9,7 @@ export default async function home() {
     <section class="hero-dark">
 
       <h1>
-        ${homeContent.title || "L'ingénierie pédagogique au service de votre performance internationale"}
+        ${homeContent.title || "L'ingénierie pédagogique au service de votre performance en anglais"}
       </h1>
 
       <p class="subtitle">
