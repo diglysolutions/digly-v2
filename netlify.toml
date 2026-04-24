@@ -16,3 +16,22 @@
   from = "/*"
   to = "/index.html"
   status = 200
+
+# Netlify Forms configuration
+[forms]
+  # Enable form detection
+  enabled = true
+
+  # Email notifications
+  [[forms.submissions]]
+    name = "contact"
+    enabled = true
+    recipients = ["dhernandez@digly-solutions.com"]
+    subject = "Nouveau lead DIGLY - {{ .Name }}"
+    reply_to = "{{ .Email }}"
+
+    # Store submissions
+    store = true
+
+    # Spam filtering
+    spam_filter = true

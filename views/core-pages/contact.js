@@ -107,7 +107,12 @@ export default function contact() {
           Soumettez vos informations pour recevoir votre rapport d'Audit Flash sous 48h.
         </p>
 
-        <form class="contact-form" onsubmit="handleLeadSubmit(event)">
+        <form class="contact-form" name="contact" method="POST" data-netlify="true" data-netlify-honeypot="website" onsubmit="handleLeadSubmit(event)">
+          <input type="hidden" name="form-name" value="contact" />
+          <input type="hidden" name="sector" id="form-sector" />
+          <input type="hidden" name="need" id="form-need" />
+          <input type="hidden" name="priority" id="form-priority" />
+          <input type="hidden" name="tag" id="form-tag" />
           <label class="field-label" for="contact-name">Nom complet</label>
           <input id="contact-name" type="text" name="name" placeholder="Nom complet" autocomplete="name" required />
 

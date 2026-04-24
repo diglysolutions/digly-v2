@@ -476,17 +476,44 @@ window.handleLeadSubmit = async (event) => {
   window.showLoader("Transmission sécurisée de votre demande...");
   window.updateProgressBar(20);
 
-  const lead = {
+  // Populate hidden fields with funnel data
+  const sectorField = form.querySelector('#form-sector');
+  const needField = form.querySelector('#form-need');
+  const priorityField = form.querySelector('#form-priority');
+  const tagField = form.querySelector('#form-tag');
+
+  const sector = window.funnel.sector || "unknown";
+  const need = window.funnel.need || "unknown";
+
+  let tag = "lead_generic";
+  if (sector === "enterprise") tag = "lead_enterprise_high_value";
+  if (sector === "education") tag = "lead_education";
+  if (sector === "training") tag = "lead_training_center";
+  if (sector === "association") tag = "lead_association";
+
+  let priority = "medium";
+  if (sector === "enterprise") priority = "high";
+  if (need === "audit") priority = "high";
+
+  if (sectorField) sectorField.value = sectorLabels[sector] || sector;
+  if (needField) needField.value = needLabels[need] || need;
+  if (priorityField) priorityField.value = priority;
+  if (tagField) tagField.value = tag;
+
+  const processedLead = {
     name: form.name.value,
     email: form.email.value,
     company: form.company.value || "",
     message: form.message.value || "",
-    sector: window.funnel.sector || "unknown",
-    need: window.funnel.need || "unknown",
-    website: form.website?.value || ""
+    sector: sector,
+    need: need,
+    priority: priority,
+    tag: tag,
+    timestamp: new Date().toISOString()
   };
 
-  if (lead.website) {
+  // Check for honeypot field (anti-spam)
+  if (form.website && form.website.value) {
     window.hideLoader();
     if (submitBtn) {
       submitBtn.disabled = false;
@@ -495,74 +522,54 @@ window.handleLeadSubmit = async (event) => {
     return;
   }
 
-  let tag = "lead_generic";
-
-  if (lead.sector === "enterprise") tag = "lead_enterprise_high_value";
-  if (lead.sector === "education") tag = "lead_education";
-  if (lead.sector === "training") tag = "lead_training_center";
-  if (lead.sector === "association") tag = "lead_association";
-
-  let priority = "medium";
-
-  if (lead.sector === "enterprise") priority = "high";
-  if (lead.need === "audit") priority = "high";
-
-  const processedLead = {
-    ...lead,
-    tag,
-    priority,
-    funnel: window.funnel,
-    timestamp: new Date().toISOString()
-  };
-
-  const payload = new FormData();
-  payload.append("name", processedLead.name);
-  payload.append("email", processedLead.email);
-  payload.append("company", processedLead.company);
-  payload.append("message", processedLead.message);
-  payload.append("sector", sectorLabels[processedLead.sector] || processedLead.sector);
-  payload.append("priority_need", needLabels[processedLead.need] || processedLead.need);
-  payload.append("tag", processedLead.tag);
-  payload.append("priority", processedLead.priority);
-  payload.append("timestamp", processedLead.timestamp);
-  payload.append("_subject", `Nouveau lead DIGLY - ${processedLead.name}`);
-  payload.append("_captcha", "false");
-  payload.append("_template", "table");
-
   try {
     window.updateLoaderText("Analyse du dossier et routage du lead...");
     window.updateProgressBar(55);
 
-    const response = await fetch(formEndpoint(), {
+    // For Netlify Forms, we need to submit the form data
+    // Netlify will handle the email sending automatically
+    const formData = new FormData();
+
+    // Add form fields
+    formData.append("form-name", "contact");
+    formData.append("name", form.name.value);
+    formData.append("email", form.email.value);
+    formData.append("company", form.company.value || "");
+    formData.append("message", form.message.value || "");
+
+    // Add funnel data
+    formData.append("sector", sectorLabels[sector] || sector);
+    formData.append("priority_need", needLabels[need] || need);
+    formData.append("priority", priority);
+    formData.append("tag", tag);
+    formData.append("timestamp", new Date().toISOString());
+
+    const response = await fetch("/", {
       method: "POST",
-      headers: {
-        Accept: "application/json"
-      },
-      body: payload
+      body: formData
     });
 
-    const result = await response.json().catch(() => ({}));
+    // Netlify Forms typically returns a success response
+    if (response.ok) {
+      window.lastLeadSubmission = processedLead;
+      window.trackConversion(processedLead);
+      window.updateLoaderText("Demande enregistrée avec succès.");
+      window.updateProgressBar(100);
 
-    if (!response.ok || result.success === "false") {
-      throw new Error(result.message || "Form submission failed");
+      setTimeout(() => {
+        window.hideLoader();
+        window.showSuccessModal();
+        form.reset();
+        window.resetFunnelUI();
+
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalBtnText;
+        }
+      }, 350);
+    } else {
+      throw new Error("Form submission failed");
     }
-
-    window.lastLeadSubmission = processedLead;
-    window.trackConversion(processedLead);
-    window.updateLoaderText("Demande enregistrée avec succès.");
-    window.updateProgressBar(100);
-
-    setTimeout(() => {
-      window.hideLoader();
-      window.showSuccessModal();
-      form.reset();
-      window.resetFunnelUI();
-
-      if (submitBtn) {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = originalBtnText;
-      }
-    }, 350);
   } catch (error) {
     console.error("Lead submission error:", error);
     window.hideLoader();
