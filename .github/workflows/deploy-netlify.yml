@@ -13,13 +13,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install Netlify CLI
-        run: npm install -g netlify-cli
+      - name: Verify files
+        run: |
+          ls -R
+          grep "v=1.0.4" index.html
 
       - name: Deploy to Netlify (Production)
+        uses: netlify/actions/cli@master
+        with:
+          args: deploy --prod --message "Deploy - ${{ github.event.head_commit.message }}"
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        run: |
-          # Usamos --clear para asegurar que no hay residuos de sesiones previas
-          netlify deploy --dir=. --prod --site="$NETLIFY_SITE_ID" --message "Deploy from GitHub Actions - $(date)"

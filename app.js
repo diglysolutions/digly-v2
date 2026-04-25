@@ -105,8 +105,6 @@ const siteConfig = () => ({
   }
 });
 
-const formEndpoint = () => `https://formsubmit.co/ajax/${siteConfig().contactEmail}`;
-
 window.setupSiteExperience = () => {
   const config = siteConfig();
 
@@ -485,6 +483,9 @@ window.handleLeadSubmit = async (event) => {
   const sector = window.funnel.sector || "unknown";
   const need = window.funnel.need || "unknown";
 
+  // Guardamos los IDs originales para el modal y lógica interna antes de traducir para el email
+  const leadIds = { sector, need };
+
   let tag = "lead_generic";
   if (sector === "enterprise") tag = "lead_enterprise_high_value";
   if (sector === "education") tag = "lead_education";
@@ -500,20 +501,27 @@ window.handleLeadSubmit = async (event) => {
   if (priorityField) priorityField.value = priority;
   if (tagField) tagField.value = tag;
 
-  const processedLead = {
-    name: form.name.value,
-    email: form.email.value,
-    company: form.company.value || "",
-    message: form.message.value || "",
-    sector: sector,
-    need: need,
-    priority: priority,
-    tag: tag,
-    timestamp: new Date().toISOString()
-  };
+  const formData = new FormData(form);
+
+  // Netlify identification: form-name is mandatory in the body
+  const params = new URLSearchParams(formData);
+  params.set("form-name", "contact");
+
+  // Sincronizar campos calculados del funnel
+  params.set("sector", sectorLabels[sector] || sector);
+  params.set("priority_need", needLabels[need] || need);
+  params.set("priority", priority);
+  params.set("tag", tag);
+  params.set("timestamp", new Date().toISOString());
+
+  // Creamos el objeto para enviar a la Función (JSON)
+  const payload = Object.fromEntries(params.entries());
+  // Agregamos los IDs originales para que el modal pueda encontrar las etiquetas
+  payload.sector_id = sector;
+  payload.need_id = need;
 
   // Check for honeypot field (anti-spam)
-  if (form.website && form.website.value) {
+  if (params.get("website")) {
     window.hideLoader();
     if (submitBtn) {
       submitBtn.disabled = false;
@@ -526,27 +534,10 @@ window.handleLeadSubmit = async (event) => {
     window.updateLoaderText("Analyse du dossier et routage du lead...");
     window.updateProgressBar(55);
 
-    // For Netlify Forms, we need to submit the form data
-    // Netlify will handle the email sending automatically
-    const formData = new FormData();
-
-    // Add form fields
-    formData.append("form-name", "contact");
-    formData.append("name", form.name.value);
-    formData.append("email", form.email.value);
-    formData.append("company", form.company.value || "");
-    formData.append("message", form.message.value || "");
-
-    // Add funnel data
-    formData.append("sector", sectorLabels[sector] || sector);
-    formData.append("priority_need", needLabels[need] || need);
-    formData.append("priority", priority);
-    formData.append("tag", tag);
-    formData.append("timestamp", new Date().toISOString());
-
-    const response = await fetch("/", {
+    const response = await fetch("/.netlify/functions/submit-lead", {
       method: "POST",
-      body: formData
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(processedLead)
     });
 
     // Netlify Forms typically returns a success response
@@ -568,7 +559,8 @@ window.handleLeadSubmit = async (event) => {
         }
       }, 350);
     } else {
-      throw new Error("Form submission failed");
+      console.error("Netlify response error:", response.status, response.statusText);
+      throw new Error(`Server returned ${response.status}`);
     }
   } catch (error) {
     console.error("Lead submission error:", error);
@@ -707,37 +699,122 @@ window.downloadSummaryPDF = () => {
   const submissionDate = currentLead.timestamp
     ? new Date(currentLead.timestamp).toLocaleString("fr-FR")
     : new Date().toLocaleString("fr-FR");
-  const messageLines = doc.splitTextToSize(
-    currentLead.message || "Aucun contexte complémentaire fourni.",
-    180
-  );
 
-  doc.setFontSize(18);
-  doc.text(pdfConfig.title, 14, 22);
-  doc.setFontSize(12);
-  doc.text(pdfConfig.subtitle, 14, 32);
-  doc.setFontSize(14);
-  doc.text("Informations transmises", 14, 45);
-  doc.setFontSize(12);
-  doc.text(`Nom : ${currentLead.name || "Non spécifié"}`, 14, 55);
-  doc.text(`Email : ${currentLead.email || "Non spécifié"}`, 14, 63);
-  doc.text(`Organisation : ${currentLead.company || "Non spécifiée"}`, 14, 71);
-  doc.text(`Secteur : ${sectorText}`, 14, 79);
-  doc.text(`Axe prioritaire : ${needText}`, 14, 87);
-  doc.text(`Date d'envoi : ${submissionDate}`, 14, 95);
-  doc.text("Contexte communiqué :", 14, 107);
-  doc.text(messageLines, 14, 115);
+  // Configuración de Colores (Alineados con CSS)
+  const primaryColor = [15, 23, 42]; // #0f172a (Azul oscuro / Slate 900)
+  const accentColor = [37, 99, 235]; // #2563eb (Azul brillante)
+  const textColor = [60, 60, 60];
 
-  const nextBlockY = 125 + (messageLines.length * 6);
-  doc.setFontSize(14);
-  doc.text(pdfConfig.nextStepsTitle, 14, nextBlockY);
-  doc.setFontSize(12);
+  const generate = (img) => {
+    // 1. Cabecera Corporativa
+    doc.setFillColor(...primaryColor);
+    doc.rect(0, 0, 210, 45, 'F');
 
-  pdfConfig.nextSteps.forEach((step, index) => {
-    doc.text(`- ${step}`, 14, nextBlockY + 10 + (index * 8));
-  });
+    // 2. Logo (Reutilizado o cargado bajo demanda)
+    if (img) {
+      doc.addImage(img, 'PNG', 14, 8, 28, 28);
+    }
 
-  doc.save(pdfConfig.filename);
+    // 3. Título y Subtítulo en Cabecera
+    doc.setTextColor(255, 255, 255);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(20);
+    doc.text(pdfConfig.title.toUpperCase(), 50, 22);
+    
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(10);
+    doc.text(pdfConfig.subtitle, 50, 30);
+
+    // 4. Bloque de Datos del Lead
+    let y = 60;
+    doc.setTextColor(...accentColor);
+    doc.setFontSize(14);
+    doc.setFont("helvetica", "bold");
+    doc.text("DONNÉES DU DIAGNOSTIC", 14, y);
+    
+    y += 4;
+    doc.setDrawColor(230, 230, 230);
+    doc.line(14, y, 196, y); // Línea divisoria sutil
+    
+    y += 10;
+    doc.setTextColor(...textColor);
+    doc.setFontSize(11);
+
+    const infoFields = [
+      ["Nom & Prénom :", currentLead.name || "Non spécifié"],
+      ["Email :", currentLead.email || "Non spécifié"],
+      ["Organisation :", currentLead.company || "Non spécifiée"],
+      ["Secteur :", sectorText],
+      ["Axe stratégique :", needText],
+      ["Date de demande :", submissionDate]
+    ];
+
+    infoFields.forEach(([label, value]) => {
+      doc.setFont("helvetica", "bold");
+      doc.text(label, 14, y);
+      doc.setFont("helvetica", "normal");
+      doc.text(value, 60, y);
+      y += 8;
+    });
+
+    // 5. Bloque de Contexto (Mensaje)
+    y += 10;
+    doc.setTextColor(...accentColor);
+    doc.setFontSize(14);
+    doc.setFont("helvetica", "bold");
+    doc.text("CONTEXTE ET BESOINS EXPRIMÉS", 14, y);
+    
+    y += 8;
+    doc.setTextColor(...textColor);
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(11);
+    
+    const messageLines = doc.splitTextToSize(
+      currentLead.message || "Aucun contexte complémentaire fourni.",
+      180
+    );
+    doc.text(messageLines, 14, y);
+    
+    // 6. Próximos Pasos (Caja destacada)
+    y += (messageLines.length * 6) + 15;
+    doc.setFillColor(245, 248, 255); // Fondo azul muy claro
+    doc.rect(14, y, 182, (pdfConfig.nextSteps.length * 9) + 15, 'F');
+    
+    y += 10;
+    doc.setTextColor(...primaryColor);
+    doc.setFont("helvetica", "bold");
+    doc.text(pdfConfig.nextStepsTitle, 20, y);
+    
+    y += 8;
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(10);
+    pdfConfig.nextSteps.forEach((step) => {
+      doc.text(`>  ${step}`, 20, y);
+      y += 8;
+    });
+
+    // 7. Pie de Página
+    doc.setFontSize(9);
+    doc.setTextColor(180, 180, 180);
+    doc.text("DIGLY — Ingénierie pédagogique & performance internationale", 105, 285, { align: "center" });
+    doc.text("www.digly-solutions.com", 105, 290, { align: "center" });
+
+    doc.save(pdfConfig.filename);
+  };
+
+  // Optimización: Intentar usar el logo ya presente en la navbar para generación instantánea
+  const existingLogo = document.querySelector('.logo-img');
+  if (existingLogo && existingLogo.complete && existingLogo.naturalWidth !== 0) {
+    generate(existingLogo);
+  } else {
+    const logoImg = new Image();
+    logoImg.onload = () => generate(logoImg);
+    logoImg.onerror = () => {
+      console.warn("Logo could not be loaded for PDF, generating without it.");
+      generate(null);
+    };
+    logoImg.src = '/assets/img/home/logo.png';
+  }
 };
 
 //

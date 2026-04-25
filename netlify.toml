@@ -1,37 +1,7 @@
-[[headers]]
-  for = "/*"
-  [headers.values]
-    # Instrucción maestra: el navegador debe verificar con el servidor si el archivo cambió
-    Cache-Control = "public, max-age=0, must-revalidate"
-    X-Frame-Options = "DENY"
-    X-XSS-Protection = "1; mode=block"
+[build]
+  publish = "."
+  functions = "netlify/functions"
 
-[[headers]]
-  for = "/assets/*"
-  [headers.values]
-    # Para archivos estáticos (CSS/Imágenes), forzamos la revalidación instantánea
-    Cache-Control = "public, max-age=0, must-revalidate"
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-
-# Netlify Forms configuration
-[forms]
-  # Enable form detection
-  enabled = true
-
-  # Email notifications
-  [[forms.submissions]]
-    name = "contact"
-    enabled = true
-    recipients = ["dhernandez@digly-solutions.com"]
-    subject = "Nouveau lead DIGLY - {{ .Name }}"
-    reply_to = "{{ .Email }}"
-
-    # Store submissions
-    store = true
-
-    # Spam filtering
-    spam_filter = true
+[functions]
+  node_version = "20"
+  external_node_modules = ["node-fetch"]
