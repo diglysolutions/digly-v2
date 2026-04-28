@@ -472,52 +472,24 @@ window.handleLeadSubmit = async (event) => {
   const originalBtnText = submitBtn ? submitBtn.innerHTML : "";
   if (submitBtn) submitBtn.innerHTML = "Traitement...";
   window.showLoader("Transmission sécurisée de votre demande...");
-  window.updateProgressBar(20);
+  window.updateProgressBar(30);
 
-  // Populate hidden fields with funnel data
-  const sectorField = form.querySelector('#form-sector');
-  const needField = form.querySelector('#form-need');
-  const priorityField = form.querySelector('#form-priority');
-  const tagField = form.querySelector('#form-tag');
+  const rawData = Object.fromEntries(new FormData(form).entries());
+  
+  // Compilation simplifiée des données
+  const leadPayload = {
+    ...rawData,
+    sector: sectorLabels[window.funnel.sector] || window.funnel.sector,
+    priority_need: needLabels[window.funnel.need] || window.funnel.need,
+    timestamp: new Date().toISOString(),
+    sector_id: window.funnel.sector,
+    need_id: window.funnel.need
+  };
 
-  const sector = window.funnel.sector || "unknown";
-  const need = window.funnel.need || "unknown";
-
-  // Guardamos los IDs originales para el modal y lógica interna antes de traducir para el email
-  const leadIds = { sector, need };
-
-  let tag = "lead_generic";
-  if (sector === "enterprise") tag = "lead_enterprise_high_value";
-  if (sector === "education") tag = "lead_education";
-  if (sector === "training") tag = "lead_training_center";
-  if (sector === "association") tag = "lead_association";
-
-  let priority = "medium";
-  if (sector === "enterprise") priority = "high";
-  if (need === "audit") priority = "high";
-
-  if (sectorField) sectorField.value = sectorLabels[sector] || sector;
-  if (needField) needField.value = needLabels[need] || need;
-  if (priorityField) priorityField.value = priority;
-  if (tagField) tagField.value = tag;
-
-  const formData = new FormData(form);
-
-  // Sincronizar campos calculados del funnel
-  formData.set("form-name", "contact");
-  formData.set("sector", sectorLabels[sector] || sector);
-  formData.set("priority_need", needLabels[need] || need);
-  formData.set("priority", priority);
-  formData.set("tag", tag);
-  formData.set("timestamp", new Date().toISOString());
-
-  // Guardamos para el modal
-  window.lastLeadSubmission = Object.fromEntries(formData.entries());
-  window.lastLeadSubmission.sector_id = sector;
-  window.lastLeadSubmission.need_id = need;
+  window.lastLeadSubmission = leadPayload;
 
   // Check for honeypot field (anti-spam)
-  if (formData.get("website")) {
+  if (rawData.website) {
     window.hideLoader();
     if (submitBtn) {
       submitBtn.disabled = false;
@@ -530,14 +502,19 @@ window.handleLeadSubmit = async (event) => {
     window.updateLoaderText("Analyse du dossier et routage du lead...");
     window.updateProgressBar(55);
 
-    const response = await fetch("/", {
+    const response = await fetch("/.netlify/functions/submit-lead", {
       method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams(formData).toString()
+      headers: { 
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(leadPayload)
     });
 
-    if (response.ok) {
-      window.trackConversion(window.lastLeadSubmission);
+    const result = await response.json();
+
+    if (response.ok && result.success) {
+      window.trackConversion(leadPayload);
       window.updateLoaderText("Demande enregistrée avec succès.");
       window.updateProgressBar(100);
 

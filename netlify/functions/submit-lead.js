@@ -1,68 +1,68 @@
-exports.handler = async (event, context) => {
+exports.handler = async (event) => {
+  console.log(`[LOG] Function triggered: ${event.httpMethod}`);
+  
   if (event.httpMethod !== "POST") {
-    return { statusCode: 405, body: "Method Not Allowed" };
+    return { statusCode: 405, body: JSON.stringify({ error: "Method Not Allowed" }) };
   }
 
   try {
     const data = JSON.parse(event.body);
-    const RESEND_API_KEY = process.env.RESEND_API_KEY;
+    console.log("[LOG] Received Data:", JSON.stringify(data));
 
+    // Basic Validation
+    if (!data.email || !data.name) {
+      console.warn("[WARN] Validation failed: Missing required fields");
+      return { statusCode: 400, body: JSON.stringify({ error: "Nom et Email sont requis" }) };
+    }
+    const message = data.message || "Aucun message fourni.";
+
+    const RESEND_API_KEY = process.env.RESEND_API_KEY;
     if (!RESEND_API_KEY) {
-      console.error("Missing RESEND_API_KEY environment variable");
-      return { statusCode: 500, body: "Configuration Error" };
+      console.error("[ERROR] Missing RESEND_API_KEY");
+      return { statusCode: 500, body: JSON.stringify({ error: "Server Configuration Error" }) };
     }
 
-    const emailPayload = {
-      from: "DIGLY System <system@digly-solutions.com>",
-      to: ["dhernandez@digly-solutions.com"],
-      subject: `🚀 Nouveau Lead : ${data.name} - ${data.company}`,
-      html: `
-        <div style="font-family: sans-serif; line-height: 1.5; color: #111;">
-          <h2>Nouveau Diagnostic Capturé</h2>
-          <p><strong>Nom:</strong> ${data.name}</p>
-          <p><strong>Email:</strong> ${data.email}</p>
-          <p><strong>Organisation:</strong> ${data.company || "Non spécifiée"}</p>
-          <hr />
-          <p><strong>Secteur:</strong> ${data.sector}</p>
-          <p><strong>Besoin Prioritaire:</strong> ${data.priority_need}</p>
-          <p><strong>Priorité:</strong> ${data.priority}</p>
-          <hr />
-          <p><strong>Message:</strong></p>
-          <p>${data.message || "Aucun message."}</p>
-          <p style="font-size: 12px; color: #666;">Envoyé le : ${data.timestamp}</p>
-        </div>
-      `,
-    };
-
+    console.log("[LOG] Sending email via Resend API...");
     const response = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${RESEND_API_KEY}`,
+        "Authorization": `Bearer ${RESEND_API_KEY}`,
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify(emailPayload),
+      body: JSON.stringify({
+        from: "DIGLY <system@digly-solutions.com>",
+        to: "dhernandez@digly-solutions.com",
+        subject: `🚀 Nouveau Lead : ${data.name}`,
+        html: `
+          <h3>Nouveau Diagnostic Capturé</h3>
+          <p><strong>Nom:</strong> ${data.name} (${data.email})</p>
+          <p><strong>Secteur:</strong> ${data.sector || "Non spécifié"}</p>
+          <p><strong>Besoin:</strong> ${data.priority_need || "Non spécifié"}</p>
+          <p><strong>Message:</strong> ${message}</p>
+        `
+      }),
     });
 
     if (response.ok) {
+      console.log("[LOG] Email sent successfully");
       return {
         statusCode: 200,
-        headers: { 
+        headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*" 
         },
-        body: JSON.stringify({ message: "Lead processed successfully" }),
+        body: JSON.stringify({ success: true, message: "Lead processed" }),
       };
     }
-
-    const errorData = await response.json();
-    console.error("Resend API Error:", errorData);
+    
+    console.error("[ERROR] Resend API Response:", resendResult);
     return {
       statusCode: response.status,
       headers: { 
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*" 
       },
-      body: JSON.stringify({ error: errorData.message || "Failed to send email" }),
+      body: JSON.stringify({ error: resendResult.message || "Failed to send email" }),
     };
   } catch (error) {
     console.error("Function Error:", error);

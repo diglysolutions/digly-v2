@@ -93,7 +93,7 @@ export default function contact() {
           Définissez l'indicateur que vous souhaitez optimiser en priorité.
         </p>
 
-        <div class="grid-2x2" id="needs-container"></div>
+        <div class="grid-2x2" id="needs-container" role="group" aria-label="Axes de diagnostic"></div>
 
       </div>
 
@@ -107,7 +107,7 @@ export default function contact() {
           Soumettez vos informations pour recevoir votre rapport d'Audit Flash sous 48h.
         </p>
 
-        <form class="contact-form" name="contact" method="POST" data-netlify="true" data-netlify-honeypot="website" onsubmit="handleLeadSubmit(event)">
+        <form class="contact-form" id="contact-form" onsubmit="handleLeadSubmit(event)">
           <input type="hidden" name="form-name" value="contact" />
           <input type="hidden" name="sector" id="form-sector" />
           <input type="hidden" name="need" id="form-need" />
