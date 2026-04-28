@@ -503,25 +503,21 @@ window.handleLeadSubmit = async (event) => {
 
   const formData = new FormData(form);
 
-  // Netlify identification: form-name is mandatory in the body
-  const params = new URLSearchParams(formData);
-  params.set("form-name", "contact");
-
   // Sincronizar campos calculados del funnel
-  params.set("sector", sectorLabels[sector] || sector);
-  params.set("priority_need", needLabels[need] || need);
-  params.set("priority", priority);
-  params.set("tag", tag);
-  params.set("timestamp", new Date().toISOString());
+  formData.set("form-name", "contact");
+  formData.set("sector", sectorLabels[sector] || sector);
+  formData.set("priority_need", needLabels[need] || need);
+  formData.set("priority", priority);
+  formData.set("tag", tag);
+  formData.set("timestamp", new Date().toISOString());
 
-  // Creamos el objeto para enviar a la Función (JSON)
-  const payload = Object.fromEntries(params.entries());
-  // Agregamos los IDs originales para que el modal pueda encontrar las etiquetas
-  payload.sector_id = sector;
-  payload.need_id = need;
+  // Guardamos para el modal
+  window.lastLeadSubmission = Object.fromEntries(formData.entries());
+  window.lastLeadSubmission.sector_id = sector;
+  window.lastLeadSubmission.need_id = need;
 
   // Check for honeypot field (anti-spam)
-  if (params.get("website")) {
+  if (formData.get("website")) {
     window.hideLoader();
     if (submitBtn) {
       submitBtn.disabled = false;
@@ -534,17 +530,14 @@ window.handleLeadSubmit = async (event) => {
     window.updateLoaderText("Analyse du dossier et routage du lead...");
     window.updateProgressBar(55);
 
-    const response = await fetch("/.netlify/functions/submit-lead", {
+    const response = await fetch("/", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(formData).toString()
     });
 
-    // Verificamos que la respuesta sea JSON (confirmación de que la función respondió)
-    const contentType = response.headers.get("content-type");
-    if (response.ok && contentType && contentType.includes("application/json")) {
-      window.lastLeadSubmission = payload;
-      window.trackConversion(payload);
+    if (response.ok) {
+      window.trackConversion(window.lastLeadSubmission);
       window.updateLoaderText("Demande enregistrée avec succès.");
       window.updateProgressBar(100);
 
