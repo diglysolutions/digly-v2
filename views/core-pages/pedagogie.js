@@ -1,92 +1,153 @@
 const solutionSteps = [
   {
     title: "1. Audit & Diagnostic de Performance",
-    text: "Nous identifions les points de friction communicationnels et les situations critiques pour cartographier les besoins réels de vos flux opérationnels.",
+    text: "Nous analysons vos flux de travail, vos interactions clés et vos points de friction afin d’identifier les situations critiques où la compétence fait défaut.",
+    detail: "Objectif : comprendre ce qui bloque réellement la performance — au-delà des besoins exprimés.",
     image: "/assets/img/methode/analyse.png",
     alt: "Analyse de besoins"
   },
   {
     title: "2. Architecture du Dispositif",
-    text: "Conception d'un écosystème d'apprentissage sur-mesure, aligné sur vos objectifs stratégiques et l'ingénierie neuro-cognitive.",
+    text: "Nous concevons un écosystème d’apprentissage sur mesure, structuré autour des piliers opérationnels :",
+    list: [
+      "Situations professionnelles réelles",
+      "Mécanismes cognitifs d’apprentissage",
+      "Objectifs opérationnels"
+    ],
     image: "/assets/img/methode/conception.png",
     alt: "Conception pedagogique"
   },
   {
     title: "3. Déploiement & Intégration Flux",
-    text: "Mise en œuvre de parcours actifs directement intégrés aux workflows des collaborateurs pour une mobilisation immédiate des compétences.",
+    text: "Nous intégrons les parcours directement dans les pratiques de travail pour que l’apprentissage devienne une extension du métier :",
+    list: [
+      "Mises en situation",
+      "Micro-apprentissages activables",
+      "Scénarios contextualisés"
+    ],
     image: "/assets/img/methode/mise-en-oeuvre.png",
     alt: "Mise en oeuvre sur le terrain"
   },
   {
     title: "4. Mesure d'Impact & ROI",
-    text: "Analyse data-driven de la montée en compétences : autonomie, fluidité des échanges et impact direct sur la performance métier.",
+    text: "Nous évaluons l’efficacité du dispositif à partir d’indicateurs concrets et pilotés par la donnée :",
+    list: [
+      "Autonomie des collaborateurs",
+      "Fluidité des interactions",
+      "Réduction des erreurs",
+      "Amélioration des performances métier"
+    ],
     image: "/assets/img/methode/evaluation.png",
     alt: "Evaluation de l'impact"
   }
 ];
 
+// Mantener caseSteps por coherencia del sistema, 
+// aunque el usuario se enfocó en Solutions para esta iteración.
 const caseSteps = [
   {
-    title: "1. Diagnostic Situationnel",
-    text: "Identification des variables contextuelles et des indicateurs de performance (KPIs) qui nécessitaient une intervention structurelle."
+    title: "1. Diagnostic situationnel",
+    text: "Analyse du contexte initial :",
+    list: [
+      "variables organisationnelles",
+      "contraintes opérationnelles",
+      "indicateurs de performance (KPIs)"
+    ],
+    detail: "Objectif : comprendre ce qui nécessite réellement une transformation.",
+    image: "/assets/img/notre-pedagogie/etudes-cas/diagnostic-situationnel.png",
+    alt: "Diagnostic situationnel"
   },
   {
-    title: "2. Ingénierie de Solution",
-    text: "Modélisation du dispositif pédagogique et sélection des leviers cognitifs activés pour répondre au challenge organisationnel."
+    title: "2. Ingénierie de solution",
+    text: "Modélisation du dispositif pédagogique :",
+    list: [
+      "choix des leviers cognitifs",
+      "structuration des situations d’apprentissage",
+      "alignement avec les enjeux métier"
+    ],
+    detail: "Objectif : relier conception pédagogique et performance opérationnelle.",
+    image: "/assets/img/notre-pedagogie/etudes-cas/ingenierie-solution.png",
+    alt: "Ingénierie de solution"
   },
   {
-    title: "3. Dynamique de Transfert",
-    text: "Observation de l'appropriation des outils par les équipes et analyse de la transformation des usages en situation réelle."
+    title: "3. Dynamique de transfert",
+    text: "Observation de l’usage réel sur le terrain :",
+    list: [
+      "appropriation des outils",
+      "transformation des pratiques",
+      "adaptation en situation"
+    ],
+    detail: "Objectif : analyser comment la compétence devient action.",
+    image: "/assets/img/notre-pedagogie/etudes-cas/dynamique-transfert.png",
+    alt: "Dynamique de transfert"
   },
   {
-    title: "4. Validation de la Performance",
-    text: "Évaluation finale basée sur des preuves tangibles de transformation et de pérennisation des acquis au sein de l'organisation."
+    title: "4. Validation de la performance",
+    text: "Évaluation des effets du dispositif :",
+    list: [
+      "évolution des comportements",
+      "amélioration des flux",
+      "stabilisation des acquis"
+    ],
+    detail: "Objectif : mesurer une transformation réelle et durable.",
+    image: "/assets/img/notre-pedagogie/etudes-cas/validation-performance.png",
+    alt: "Validation de la performance"
   }
 ];
 
 const solutionPrinciples = [
   {
     title: "Engagement Cognitif Actif",
-    text: "Nous privilégions l'action et la prise de décision pour transformer l'acquisition de connaissances en compétences immédiatement exploitables."
+    text: "Nous privilégions l’action, la résolution de problèmes et la prise de décision pour transformer les connaissances en compétences mobilisables immédiatement.",
+    image: "/assets/img/notre-pedagogie/solutions/engagement-cognitif-actif.png"
   },
   {
     title: "Régulation Métacognitive",
-    text: "Accompagnement des collaborateurs dans la compréhension de leurs propres mécanismes d'apprentissage pour optimiser leur progression."
+    text: "Nous aidons les apprenants à comprendre comment ils apprennent, afin d’améliorer leur autonomie et leur capacité d’adaptation.",
+    image: "/assets/img/notre-pedagogie/solutions/regulation-metacognitive.png"
   },
   {
     title: "Ingénierie Neuro-Cognitive",
-    text: "Nos architectures s'appuient sur les sciences de l'apprentissage pour maximiser la rétention d'information et l'ancrage mémoriel à long terme."
+    text: "Nos dispositifs sont conçus pour optimiser la rétention, l’ancrage mémoriel et le transfert des acquis à long terme.",
+    image: "/assets/img/notre-pedagogie/solutions/ingenierie-neurocognitive.png"
   },
   {
     title: "Écologie de l'Apprentissage",
-    text: "Immersion totale dans des situations professionnelles authentiques pour garantir un transfert fluide entre la formation et le terrain."
+    text: "Les apprentissages sont immergés dans des contextes professionnels authentiques pour garantir leur utilisation réelle sur le terrain.",
+    image: "/assets/img/notre-pedagogie/solutions/ecologie-apprentissage.png"
   },
   {
     title: "Pilotage par la Performance",
-    text: "Chaque dispositif est orienté vers des résultats tangibles : réduction des erreurs de communication et accélération de l'exécution."
+    text: "Chaque dispositif est orienté vers des résultats tangibles : réduction des erreurs de communication et accélération de l'exécution.",
+    image: "/assets/img/notre-pedagogie/solutions/pilotage-performance.png"
   }
 ];
 
 const casePrinciples = [
   {
-    title: "Analyse Systémique",
-    text: "Chaque étude de cas est traitée comme un écosystème unique, intégrant contraintes opérationnelles, culture d'entreprise et objectifs business."
+    title: "Analyse systémique",
+    text: "Chaque situation est considérée comme un écosystème intégrant contraintes, interactions et objectifs.",
+    image: "/assets/img/notre-pedagogie/etudes-cas/analyse-systemique.png"
   },
   {
-    title: "Métriques de Transformation",
-    text: "Évaluation rigoureuse de l'évolution des comportements professionnels et de l'optimisation des flux d'interaction."
+    title: "Métriques de transformation",
+    text: "Nous observons l’évolution des pratiques à travers des indicateurs concrets et comparables.",
+    image: "/assets/img/notre-pedagogie/etudes-cas/metriques-transformation.png"
   },
   {
-    title: "Corrélation Cognition-Métier",
-    text: "Démonstration scientifique du lien entre les choix d'ingénierie pédagogique et l'amélioration de l'efficience opérationnelle."
+    title: "Corrélation cognition–métier",
+    text: "Nous analysons le lien entre les choix pédagogiques et leurs effets sur la performance opérationnelle.",
+    image: "/assets/img/notre-pedagogie/etudes-cas/correlation-cognition-metier.png"
   },
   {
-    title: "Analytics de l'Impact",
-    text: "Traduction des résultats pédagogiques en données exploitables pour le management (ROI, rétention, qualité de production)."
+    title: "Analytics de l’impact",
+    text: "Les résultats sont traduits en données exploitables pour le pilotage et la prise de décision.",
+    image: "/assets/img/notre-pedagogie/etudes-cas/analytics-impact.png"
   },
   {
-    title: "Capitalisation Stratégique",
-    text: "Extraction de leviers d'amélioration continue et de bonnes pratiques réutilisables pour renforcer la culture apprenante de l'organisation."
+    title: "Capitalisation stratégique",
+    text: "Chaque cas permet d’identifier des leviers réutilisables et d’alimenter une logique d’amélioration continue.",
+    image: "/assets/img/notre-pedagogie/etudes-cas/capitalisation-strategique.png"
   }
 ];
 
@@ -94,15 +155,20 @@ function renderSteps(steps) {
   return `
     <div class="grid-2x2 pedagogy-steps-grid">
       ${steps.map((step) => `
-        <div class="card hover-card pedagogy-step-card fade-in">
+        <div class="card hover-card pedagogy-step-card fade-in" style="display: flex; flex-direction: column; padding: 0; overflow: hidden; text-align: left;">
           ${step.image ? `
-            <div class="pedagogy-step-media">
-              <img src="${step.image}" alt="${step.alt || step.title}" loading="lazy">
+            <div class="pedagogy-step-media" style="width: 100%; aspect-ratio: 16/10; overflow: hidden;">
+              <img src="${step.image}" alt="${step.alt || step.title}" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
             </div>
           ` : ""}
-          <div class="pedagogy-step-content">
-            <h3>${step.title}</h3>
+          <div class="pedagogy-step-content" style="padding: 24px;">
+            <h3 style="margin-top: 0;">${step.title}</h3>
             <p>${step.text}</p>
+            ${step.detail ? `<p class="step-objective" style="margin-top: 12px; font-weight: 600; font-size: 0.9em; color: #000000;">${step.detail}</p>` : ""}
+            ${step.list ? `
+              <ul style="margin-top: 12px; padding-left: 18px; font-size: 0.9em; opacity: 0.9;">
+                ${step.list.map(item => `<li style="margin-bottom: 4px;">${item}</li>`).join("")}
+              </ul>` : ""}
           </div>
         </div>
       `).join("")}
@@ -114,9 +180,16 @@ function renderPrinciples(principles) {
   return `
     <div class="grid-2x2 pedagogy-principles-grid">
       ${principles.map((principle) => `
-        <div class="card hover-card pedagogy-principle-card fade-in">
-          <h3>${principle.title}</h3>
-          <p>${principle.text}</p>
+        <div class="card hover-card pedagogy-principle-card fade-in" style="display: flex; flex-direction: column; padding: 0; overflow: hidden; text-align: left;">
+          ${principle.image ? `
+            <div class="principle-media" style="width: 100%; aspect-ratio: 16/10; overflow: hidden;">
+              <img src="${principle.image}" alt="${principle.title}" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
+            </div>
+          ` : ""}
+          <div class="principle-content" style="padding: 24px;">
+            <h3 style="margin-top: 0; font-size: 1.25rem;">${principle.title}</h3>
+            <p style="margin-bottom: 0; font-size: 0.95rem; line-height: 1.5; color: #475569;">${principle.text}</p>
+          </div>
         </div>
       `).join("")}
     </div>
@@ -145,11 +218,11 @@ export default function pedagogie() {
 
       <div class="section hero-dark center">
 
-        <h1>Ingénierie & Sciences de l'Apprentissage</h1>
+        <h1>Ingénierie & Sciences de l’Apprentissage</h1>
 
         <p class="subtitle">
-          Une expertise en conception de dispositifs fondée sur la psychologie cognitive, 
-          l'ingénierie systémique et la mesure d'impact opérationnel.
+          Une expertise en conception de dispositifs pédagogiques fondée sur les sciences cognitives, 
+          l’ingénierie systémique et l’analyse de la performance terrain.
         </p>
 
         <p class="tags">
@@ -175,8 +248,8 @@ export default function pedagogie() {
         <div class="section center pedagogy-intro">
           <h2>Comment nous concevons un dispositif d'apprentissage</h2>
           <p class="subtitle">
-            Nous concevons des solutions pedagogiques comme des systemes utiles,
-            activables et directement relies aux usages reels des apprenants.
+            Nous concevons des dispositifs pédagogiques comme des systèmes opérationnels, 
+            pensés pour être utilisés dans l’action — et non comme des contenus à consommer.
           </p>
         </div>
 
@@ -184,7 +257,7 @@ export default function pedagogie() {
           <h2>Notre méthode en 4 étapes</h2>
           <p class="subtitle">
             Une feuille de route simple pour passer du besoin reel a un dispositif
-            pedagogique qui produit des effets visibles.
+            pédagogique concret, activable et orienté résultats.
           </p>
           ${renderSteps(solutionSteps)}
         </div>
@@ -192,8 +265,7 @@ export default function pedagogie() {
         <div class="section center">
           <h2>Nos fondements pédagogiques</h2>
           <p class="subtitle">
-            Notre conception s'appuie sur des principes issus des sciences de
-            l'apprentissage et de l'observation fine des contextes humains.
+            Notre approche s’appuie sur les sciences de l’apprentissage et l’observation des dynamiques réelles de travail.
           </p>
           ${renderPrinciples(solutionPrinciples)}
         </div>
@@ -205,27 +277,40 @@ export default function pedagogie() {
       <div class="pedagogy-panel" data-section="cases">
 
         <div class="section center pedagogy-intro">
-          <h2>Comment nous lisons une transformation sur le terrain</h2>
-          <p class="subtitle">
-            Nos etudes de cas ne sont pas de simples recits de projet:
-            elles montrent comment une progression devient lisible, transferable et interpretable.
+          <h2>Études de cas</h2>
+          <p class="subtitle" style="font-weight: 600; font-size: 1.4rem; color: #0f172a; margin-bottom: 20px;">
+            Une lecture structurée de la transformation sur le terrain.
           </p>
+          <p style="max-width: 800px; margin: 0 auto 40px; font-size: 1.1rem; opacity: 0.9;">
+            Nous ne présentons pas uniquement des résultats : nous analysons comment une transformation se produit, se stabilise et devient mesurable dans un contexto réel.
+          </p>
+
+          <hr style="width: 50px; border: 1px solid #2563eb; margin: 40px auto; opacity: 0.3;">
+
+          <h2 style="margin-top: 40px;">Comment nous analysons une transformation</h2>
+          <p class="subtitle">
+            Chaque étude de cas est construite comme une grille de lecture. 
+            L’objectif n’est pas seulement de montrer un résultat, mais de rendre visible :
+          </p>
+          <ul style="list-style: none; padding: 0; display: inline-block; text-align: left; margin-top: 10px;">
+            <li style="margin-bottom: 8px;">🔹 les mécanismes de transformation</li>
+            <li style="margin-bottom: 8px;">🔹 les conditions d’appropriation</li>
+            <li>🔹 la nature des effets observés</li>
+          </ul>
         </div>
 
         <div class="section center">
-          <h2>Notre méthode en 4 étapes</h2>
+          <h2>Notre grille d’analyse en 4 dimensions</h2>
           <p class="subtitle">
-            Une grille d'analyse qui permet de comprendre le contexte, le dispositif,
-            la mise en oeuvre et la nature des effets observes.
+            Une structure claire pour comprendre un dispositif, sa mise en œuvre et ses effets réels sur le terrain.
           </p>
           ${renderSteps(caseSteps)}
         </div>
 
         <div class="section center">
-          <h2>Nos repères d'analyse</h2>
+          <h2>Nos repères d’analyse</h2>
           <p class="subtitle">
-            Nous analysons les cas avec une lecture exigeante de l'apprentissage,
-            de la cognition et de la transformation en situation.
+            Nous mobilisons plusieurs niveaux de lecture pour interpréter chaque transformation :
           </p>
           ${renderPrinciples(casePrinciples)}
         </div>
@@ -236,14 +321,13 @@ export default function pedagogie() {
 
       <div class="section center conversion-block fade-in">
 
-        <h2>Discutons de votre contexte</h2>
+        <h2>Discutons de votre contexte </h2>
 
         <p>
-          Nous pouvons analyser votre besoin, clarifier votre dispositif et identifier
-          la bonne logique pedagogique pour votre situation.
+          Chaque organisation a ses propres contraintes, ses propres flux et ses propres enjeux.
         </p>
 
-        <button class="cta primary" onclick="navigate('/contact')">
+        <button class="cta primary" onclick="navigate('/contact')" style="min-width: 280px;">
           Prendre contact
         </button>
 

@@ -8,7 +8,7 @@
 body {
   font-family: Inter, system-ui, sans-serif;
   background: #ffffff;
-  color: #111;
+  color: #1e293b;
 }
 
 /* HEADER GLOBAL */
@@ -46,7 +46,8 @@ body {
 /* TIPOGRAFÍA BASE */
 h1 {
   font-size: 48px;
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: -0.022em;
   margin-bottom: 20px;
 }
 
@@ -897,12 +898,12 @@ p {
   /* Los headers ahora se ajustan al ancho de la pantalla */
   h1, #app h1, .hero-dark h1 {
     font-size: clamp(1.7rem, 8vw, 2.1rem) !important;
-    line-height: 1.15 !important;
-    letter-spacing: -0.02em !important;
+    line-height: 1.2 !important;
+    letter-spacing: -0.03em !important;
     word-wrap: break-word !important;
     overflow-wrap: break-word !important;
     hyphens: auto;
-    margin-bottom: 16px !important;
+    margin-bottom: 12px !important;
   }
 
   h2, #app h2, .section h2 {
@@ -957,14 +958,18 @@ p {
 /* GLOBAL TYPOGRAPHY SCALE-UP */
 .nav-links a {
   font-size: 16px;
+  letter-spacing: -0.01em;
 }
 
 #app h1 {
   font-size: clamp(2.2rem, 5vw, 4.6rem);
+  letter-spacing: -0.025em;
 }
 
 #app h2 {
-  font-size: clamp(2.4rem, 3.6vw, 3rem);
+  font-size: clamp(2.1rem, 3.2vw, 2.8rem);
+  letter-spacing: -0.02em;
+  font-weight: 700;
 }
 
 #app h3 {
@@ -983,6 +988,7 @@ p {
 #app .filter-btn,
 #app .cta {
   font-size: 18px;
+  line-height: 1.6;
 }
 
 #app input,
@@ -1545,6 +1551,60 @@ body.menu-open {
   .nav-dropdown.open .dropdown-menu {
     display: grid;
   }
+
+/* 🎯 ESTILOS ESPECÍFICOS PARA PRODUCT CARD (ELEGANCIA CORPORATIVA) */
+.product-card {
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.08) !important;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03);
+}
+
+.product-card h3 {
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+.product-card .badge {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.product-cta {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.product-card:hover .product-cta span {
+  transform: translateX(4px);
+}
+
+/* 🎯 ESTILOS ESPECÍFICOS PARA PRODUCT CARD (ELEGANCIA CORPORATIVA) */
+.product-card {
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.08) !important;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03);
+}
+
+.product-card h3 {
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+.product-card .badge {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.product-cta {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.product-card:hover .product-cta span {
+  transform: translateX(4px);
+}
 
   .dropdown-menu a {
     font-size: 14px;

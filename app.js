@@ -537,13 +537,14 @@ window.handleLeadSubmit = async (event) => {
     const response = await fetch("/.netlify/functions/submit-lead", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(processedLead)
+      body: JSON.stringify(payload)
     });
 
-    // Netlify Forms typically returns a success response
-    if (response.ok) {
-      window.lastLeadSubmission = processedLead;
-      window.trackConversion(processedLead);
+    // Verificamos que la respuesta sea JSON (confirmación de que la función respondió)
+    const contentType = response.headers.get("content-type");
+    if (response.ok && contentType && contentType.includes("application/json")) {
+      window.lastLeadSubmission = payload;
+      window.trackConversion(payload);
       window.updateLoaderText("Demande enregistrée avec succès.");
       window.updateProgressBar(100);
 
@@ -559,7 +560,7 @@ window.handleLeadSubmit = async (event) => {
         }
       }, 350);
     } else {
-      console.error("Netlify response error:", response.status, response.statusText);
+      console.error("Function not found or invalid response:", response.status);
       throw new Error(`Server returned ${response.status}`);
     }
   } catch (error) {
@@ -656,10 +657,12 @@ window.showSuccessModal = () => {
   const currentLead = window.lastLeadSubmission || window.funnel;
 
   if (sectorEl) {
-    sectorEl.innerText = sectorLabels[currentLead.sector] || "Non spécifié";
+    const sectorKey = currentLead.sector_id || currentLead.sector;
+    sectorEl.innerText = sectorLabels[sectorKey] || sectorKey || "Non spécifié";
   }
   if (needEl) {
-    needEl.innerText = needLabels[currentLead.need] || "Non spécifié";
+    const needKey = currentLead.need_id || currentLead.need;
+    needEl.innerText = needLabels[needKey] || needKey || "Non spécifié";
   }
 
   if (modal) {
@@ -694,8 +697,8 @@ window.downloadSummaryPDF = () => {
   const pdfConfig = config.pdf;
 
   const currentLead = window.lastLeadSubmission || window.funnel;
-  const sectorText = sectorLabels[currentLead.sector] || "Non spécifié";
-  const needText = needLabels[currentLead.need] || "Non spécifié";
+  const sectorText = sectorLabels[currentLead.sector_id] || currentLead.sector || "Non spécifié";
+  const needText = needLabels[currentLead.need_id] || currentLead.priority_need || "Non spécifié";
   const submissionDate = currentLead.timestamp
     ? new Date(currentLead.timestamp).toLocaleString("fr-FR")
     : new Date().toLocaleString("fr-FR");

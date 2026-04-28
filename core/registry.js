@@ -8,6 +8,7 @@ export const registry = {
   "solutions-centres-formation": () => import("/views/solutions/solutions-centres-formation.js"),
   "solutions-entreprises": () => import("/views/solutions/solutions-entreprises.js"),
   "solutions-associations": () => import("/views/solutions/solutions-associations.js"),
+  "solutions-business-english": () => import("/views/solutions/solutions-business-english.js"),
 
   cases: () => import("/views/cases/cases.js"),
   case: () => import("/views/cases/case.js")

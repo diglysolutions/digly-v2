@@ -180,5 +180,15 @@ export default async function cases() {
       </div>
 
     </section>
+
+    <footer class="footer fade-in">
+      <p>© DIGLY — Learning that works.</p>
+      <p>since 2025</p>
+
+      <div class="footer-links">
+        <a href="/mentions-legales.html">Conditions légales</a>
+        <a href="/politique-confidentialite.html">Politique de confidentialité</a>
+      </div>
+    </footer>
   `;
 }
