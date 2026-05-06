@@ -511,9 +511,13 @@ window.handleLeadSubmit = async (event) => {
       body: JSON.stringify(leadPayload)
     });
 
-    const result = await response.json();
+    let result = {};
+    const contentType = response.headers.get("content-type");
+    if (contentType && contentType.includes("application/json")) {
+      result = await response.json();
+    }
 
-    if (response.ok && result.success) {
+    if (response.ok && result?.success) {
       window.trackConversion(leadPayload);
       window.updateLoaderText("Demande enregistrée avec succès.");
       window.updateProgressBar(100);

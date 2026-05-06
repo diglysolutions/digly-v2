@@ -167,46 +167,47 @@
     },
     {
       "id": "academic-english-program",
-      "title": "Renforcer l'aisance orale dans un parcours académique international",
+      "partnerLogo": "/assets/img/partenaires/ipssi-logo.png",
+      "title": "Développer l’anglais professionnel dans des situations réelles de recrutement IT",
       "category": "university",
-      "type": "Cas université",
-      "subtitle": "Un programme d'accompagnement conçu pour rapprocher niveau linguistique et usages universitaires réels.",
-      "context": "Université publique développant plusieurs parcours à dimension internationale. Les étudiants comprenaient les contenus, mais restaient en retrait dans les échanges, présentations et situations de mobilité.",
-      "challenge": "Le problème n'était pas seulement lexical : les étudiants manquaient de sécurité dans les interactions académiques concrètes, ce qui limitait leur participation et leur projection.",
+      "type": "Cas école spécialisée IT",
+      "subtitle": "Un dispositif hybride conçu pour transformer des compétences linguistiques en capacité d’action professionnelle.",
+      "context": "L'IPSSI (Institut Privé Supérieur des Sciences Informatiques) est une école spécialisée dans les métiers du numérique (Développement, Cybersécurité, IA, Data et Game Dev) avec des campus à Paris, Montpellier, Lille et Bordeaux. <br><br> Sa pédagogie, centrée sur l'employabilité et l'action, forme des profils opérationnels via des projets concrets et des intervenants issus du secteur. Ce dispositif visait à transformer les acquis théoriques d'étudiants en Bachelor (B1–B2) en capacité d'action réelle : analyse d'offres IT, simulations de contact recruteur et pitch technique, le tout via un format hybride adapté aux réalités du marché.",
+      "challenge": "Les étudiants savaient comprendre, mais pas encore agir en anglais (analyse d'offres, aisance orale, contact recruteur). L'enjeu était de réduire l'écart entre compétences académiques et usages métier.",
       "metrics": {
-        "m1": "+45%",
-        "m1_label": "de progression en aisance orale",
-        "m2": "+28%",
-        "m2_label": "de participation active en cours",
-        "m3": "+19%",
-        "m3_label": "de confiance perçue avant mobilité"
+        "m1": "+40%",
+        "m1_label": "d’aisance dans les interactions orales",
+        "m2": "+35%",
+        "m2_label": "de capacité à structurer un message technique",
+        "m3": "+30%",
+        "m3_label": "d’autonomie en recherche de stage"
       },
       "approach": [
         {
-          "title": "Analyse des usages cibles",
-          "text": "Repérage des situations académiques concrètes : présentation, discussion, interaction de groupe et mobilité."
+          "title": "Ancrage usages IT",
+          "text": "Analyse d'offres réelles, simulations de contact recruteur, rédaction technique et pitch de projets."
         },
         {
-          "title": "Parcours contextualisé",
-          "text": "Construction d'un dispositif centré sur l'oral, la structuration des idées et l'interaction crédible."
+          "title": "Format hybride intensif",
+          "text": "11,5h sur 2 jours avec une forte densité cognitive alternant sessions individuelles et collectives."
         },
         {
-          "title": "Évaluation de transfert",
-          "text": "Mesure de la progression à travers des situations simulées proches de la réalité universitaire."
+          "title": "Production de livrables",
+          "text": "Création de profils LinkedIn, emails types et rapports techniques directement exploitables."
         }
       ],
       "before": [
-        "Étudiants hésitants dans les prises de parole",
-        "Participation limitée malgré une bonne compréhension",
-        "Écart entre apprentissage linguistique et situations académiques réelles"
+        "Compréhension correcte mais peu mobilisée",
+        "Difficulté à se projeter dans l'IT international",
+        "Communication hésitante et peu structurée"
       ],
       "after": [
-        "Présentations plus structurées et plus assumées",
-        "Participation plus active dans les séminaires",
-        "Meilleure projection dans les contextes internationaux"
+        "Capacité à répondre à des offres réelles",
+        "Communication orale plus fluide et structurée",
+        "Réflexes professionnels (LinkedIn, email, reporting)"
       ],
-      "result": "+45% d'aisance orale observée, engagement renforcé et meilleure cohérence entre ambition internationale et usages étudiants.",
-      "insight": "Dans le supérieur, l'anglais devient réellement utile quand il est travaillé comme un outil de participation, pas seulement comme une discipline."
+      "result": "Engagement élevé, production concrète directement exploitable et gain significatif en autonomie pour la recherche de stage.",
+      "insight": "Dans l'IT, l'anglais devient opérationnel quand il est travaillé comme un outil d'action (chercher, contacter, expliquer) plutôt que comme une discipline académique."
     },
     {
       "id": "formation-hospitality",

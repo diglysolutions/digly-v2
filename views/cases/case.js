@@ -34,8 +34,47 @@ export default async function casePage(id) {
   };
 
   return `
-    <section class="case-page">
+    <section class="case-page" style="font-size: 1.15rem; line-height: 1.6; color: #1e293b;">
+      <style>
+        .case-page h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 1.5rem; }
+        .case-page h2 { font-size: 2.25rem; margin-bottom: 2rem; color: #0f172a; font-weight: 700; }
+        .case-page .subtitle { font-size: 1.5rem !important; max-width: 900px; margin: 0 auto 2rem; opacity: 0.9; line-height: 1.4; }
+        
+        .case-page .text-block { font-size: 1.3rem; max-width: 100%; margin: 0; color: #475569; }
+        
+        .highlight-card { background: #f8fafc; border-left: 5px solid #2563eb; padding: 40px !important; border-radius: 0 16px 16px 0; }
+        .highlight-card p { font-size: 1.4rem; font-weight: 500; color: #1e293b; margin: 0; }
 
+        .approach-card { padding: 32px !important; text-align: left; border-top: 4px solid #2563eb; height: 100%; }
+        .approach-card h3 { font-size: 1.4rem; margin-bottom: 12px; color: #0f172a; }
+        .approach-card p { font-size: 1.1rem; color: #475569; margin: 0; }
+
+        .transformation-card { padding: 32px !important; text-align: left; border-radius: 20px; border: 1px solid rgba(0,0,0,0.05); }
+        .before-card { background: #fffafa; border-bottom: 4px solid #ef4444; }
+        .after-card { background: #f0fdf4; border-bottom: 4px solid #22c55e; }
+        .transformation-card h3 { font-size: 1.25rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 20px; font-weight: 800; }
+        .transformation-card ul li { margin-bottom: 12px; position: relative; padding-left: 5px; }
+        .before-card h3 { color: #ef4444; }
+        .after-card h3 { color: #16a34a; }
+
+        .result-card { background: white; padding: 60px 40px !important; border-radius: 24px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
+        .result-card .highlight { font-size: 1.75rem; font-weight: 700; color: #0f172a; line-height: 1.3; }
+
+        .insight-box { background: #0f172a; color: white; padding: 60px 40px; border-radius: 32px; text-align: center; }
+        .insight-box h3 { color: #3b82f6; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 20px; }
+        .insight-box p { font-size: 1.8rem; font-weight: 600; line-height: 1.4; margin: 0; }
+
+        .context-card { background: white; padding: 60px !important; border-radius: 32px; box-shadow: 0 20px 40px rgba(0,0,0,0.06); border: 1px solid rgba(0,0,0,0.02); max-width: 1000px; margin: 0 auto; transition: all 0.3s ease; text-align: left; }
+        .context-card:hover { transform: translateY(-5px); box-shadow: 0 30px 60px rgba(0,0,0,0.12); }
+
+        @media (max-width: 768px) {
+          .case-page h1 { font-size: 2.2rem; }
+          .case-page h2 { font-size: 1.8rem; }
+          .case-page .subtitle { font-size: 1.2rem !important; }
+          .insight-box p { font-size: 1.4rem; }
+          .metrics-bar { flex-direction: column; gap: 24px; padding: 30px 20px; }
+        }
+      </style>
 
       <!-- 🔵 HERO -->
       <div class="section hero-dark center fade-in">
@@ -52,17 +91,17 @@ export default async function casePage(id) {
         <div class="metrics-bar">
 
           <div class="metric">
-            <h3>${caseItem.metrics?.m1 || "+32%"}</h3>
+            <h3 style="font-size: 3.5rem;">${caseItem.metrics?.m1 || "+32%"}</h3>
             <p>${caseItem.metrics?.m1_label || "de fluidité dans les échanges"}</p>
           </div>
 
           <div class="metric">
-            <h3>${caseItem.metrics?.m2 || "-40%"}</h3>
+            <h3 style="font-size: 3.5rem;">${caseItem.metrics?.m2 || "-40%"}</h3>
             <p>${caseItem.metrics?.m2_label || "d'erreurs de compréhension"}</p>
           </div>
 
           <div class="metric">
-            <h3>${caseItem.metrics?.m3 || "2x"}</h3>
+            <h3 style="font-size: 3.5rem;">${caseItem.metrics?.m3 || "2x"}</h3>
             <p>${caseItem.metrics?.m3_label || "de rapidité de décision"}</p>
           </div>
 
@@ -74,13 +113,19 @@ export default async function casePage(id) {
 
       <!-- 🧠 CONTEXT -->
       <div class="section center fade-in">
+        <div class="context-card">
+          ${caseItem.partnerLogo ? `
+            <div style="margin-bottom: 3.5rem; display: flex; justify-content: center;">
+              <img src="${caseItem.partnerLogo}" alt="Logo ${caseItem.title}" style="max-height: 130px; width: auto; filter: grayscale(1) opacity(0.8); transition: all 0.4s ease;" onmouseover="this.style.filter='none'; this.style.opacity='1'; this.style.transform='scale(1.05)'" onmouseout="this.style.filter='grayscale(1) opacity(0.8)'; this.style.transform='scale(1)'">
+            </div>
+          ` : ""}
 
-        <h2>Contexte</h2>
+          <h2 style="margin-top: 0; text-align: center;">Contexte</h2>
 
-        <p class="text-block">
-          ${caseItem.context}
-        </p>
-
+          <p class="text-block">
+            ${caseItem.context}
+          </p>
+        </div>
       </div>
 
 
@@ -114,7 +159,7 @@ export default async function casePage(id) {
             { title: "Conception", text: "Construction d’un dispositif adapté au contexte." },
             { title: "Déploiement", text: "Intégration du parcours dans les usages réels." }
           ]).map(step => `
-            <div class="card hover-card">
+            <div class="card hover-card approach-card">
               <h3>${step.title}</h3>
               <p>${step.text}</p>
             </div>
@@ -133,30 +178,28 @@ export default async function casePage(id) {
 
         <div class="grid-2x2">
 
-          <div class="card hover-card before-card">
-
+          <div class="card transformation-card before-card">
             <h3>Avant</h3>
 
             <ul>
               ${(caseItem.before || [
-                "Communication fragmentée",
-                "Décisions ralenties",
-                "Manque de clarté"
-              ]).map(i => `<li>${i}</li>`).join("")}
+                "Communication hésitante",
+                "Usage limité de l'anglais",
+                "Difficulté à se projeter"
+              ]).map(i => `<li>❌ ${i}</li>`).join("")}
             </ul>
 
           </div>
 
-          <div class="card hover-card after-card">
-
+          <div class="card transformation-card after-card">
             <h3>Après</h3>
 
             <ul>
               ${(caseItem.after || [
-                "Échanges plus structurés",
-                "Exécution plus rapide",
-                "Équipes mieux alignées"
-              ]).map(i => `<li>${i}</li>`).join("")}
+                "Communication fluide et structurée",
+                "Réflexes professionnels acquis",
+                "Capacité d'action réelle"
+              ]).map(i => `<li>✅ ${i}</li>`).join("")}
             </ul>
 
           </div>

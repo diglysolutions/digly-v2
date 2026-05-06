@@ -151,6 +151,10 @@ export default function contact() {
           Votre demande sera traitée par un consultant en ingénierie pédagogique pour garantir la pertinence des préconisations.
         </p>
 
+        <button class="cta primary" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+          Commencer mon diagnostic
+        </button>
+
       </div>
 
 

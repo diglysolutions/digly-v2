@@ -55,6 +55,7 @@ exports.handler = async (event) => {
       };
     }
     
+    const resendResult = await response.json();
     console.error("[ERROR] Resend API Response:", resendResult);
     return {
       statusCode: response.status,
