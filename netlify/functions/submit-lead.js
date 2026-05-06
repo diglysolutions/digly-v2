@@ -1,8 +1,21 @@
 exports.handler = async (event) => {
   console.log(`[LOG] Function triggered: ${event.httpMethod}`);
   
+  // Cabeceras comunes para CORS y JSON
+  const headers = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "Content-Type, Accept",
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    "Content-Type": "application/json"
+  };
+
+  // Manejo de petición preflight (CORS)
+  if (event.httpMethod === "OPTIONS") {
+    return { statusCode: 200, headers, body: "" };
+  }
+
   if (event.httpMethod !== "POST") {
-    return { statusCode: 405, body: JSON.stringify({ error: "Method Not Allowed" }) };
+    return { statusCode: 405, headers, body: JSON.stringify({ error: "Method Not Allowed" }) };
   }
 
   try {
@@ -12,14 +25,14 @@ exports.handler = async (event) => {
     // Basic Validation
     if (!data.email || !data.name) {
       console.warn("[WARN] Validation failed: Missing required fields");
-      return { statusCode: 400, body: JSON.stringify({ error: "Nom et Email sont requis" }) };
+      return { statusCode: 400, headers, body: JSON.stringify({ error: "Nom et Email sont requis" }) };
     }
     const message = data.message || "Aucun message fourni.";
 
     const RESEND_API_KEY = process.env.RESEND_API_KEY;
     if (!RESEND_API_KEY) {
       console.error("[ERROR] Missing RESEND_API_KEY");
-      return { statusCode: 500, body: JSON.stringify({ error: "Server Configuration Error" }) };
+      return { statusCode: 500, headers, body: JSON.stringify({ error: "Server Configuration Error" }) };
     }
 
     console.log("[LOG] Sending email via Resend API...");
@@ -47,10 +60,7 @@ exports.handler = async (event) => {
       console.log("[LOG] Email sent successfully");
       return {
         statusCode: 200,
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*" 
-        },
+        headers,
         body: JSON.stringify({ success: true, message: "Lead processed" }),
       };
     }
@@ -59,20 +69,14 @@ exports.handler = async (event) => {
     console.error("[ERROR] Resend API Response:", resendResult);
     return {
       statusCode: response.status,
-      headers: { 
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*" 
-      },
+      headers,
       body: JSON.stringify({ error: resendResult.message || "Failed to send email" }),
     };
   } catch (error) {
     console.error("Function Error:", error);
     return {
       statusCode: 500,
-      headers: { 
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*" 
-      },
+      headers,
       body: JSON.stringify({ error: error.message }),
     };
   }
